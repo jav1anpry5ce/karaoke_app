@@ -1,11 +1,12 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { TbArrowsRandom } from "react-icons/tb";
 import { Context } from "../context/AppContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 const shortid = require("shortid");
 
 export default function Join() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { joinRoom, randomIcon } = useContext(Context);
   const ref = useRef();
   const submit = (e) => {
@@ -25,6 +26,11 @@ export default function Join() {
     const icon = randomIcon();
     ref.current.image.value = icon;
   };
+
+  useEffect(() => {
+    ref.current.room.value = searchParams.get("room");
+  }, [searchParams]);
+
   return (
     <main className="h-screen overflow-hidden bg-[url(./assets/images/party.jpg)] bg-cover bg-fixed bg-right-top">
       <div className="flex h-full w-full flex-col items-center justify-center bg-black/40 p-4">

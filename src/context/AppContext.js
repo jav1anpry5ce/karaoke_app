@@ -13,6 +13,7 @@ const Provider = ({ children }) => {
   const [room, setRoom] = useState(null);
   const [host, setHost] = useState(null);
   const [user, setUser] = useState(null);
+  const [users, setUsers] = useState([]);
   const [inRoom, setInRoom] = useState(false);
 
   // Functions
@@ -47,7 +48,7 @@ const Provider = ({ children }) => {
     setQueue((queue) => queue.slice(1));
   };
 
-  const onError = () => {
+  const onPlaybackError = () => {
     const song = queue[0];
     setCurrentSong(song);
     setQueue((queue) => queue.slice(1));
@@ -70,8 +71,7 @@ const Provider = ({ children }) => {
   // Socket events
   useEffect(() => {
     socket.on("disconnect", () => {
-      socket.connect();
-      socket.emit("reconnect", user);
+      if (user && inRoom) socket.emit("reconnect", user);
     });
     socket.on("updateQueue", (data) => {
       if (!currentSong) {
@@ -88,7 +88,11 @@ const Provider = ({ children }) => {
       }
     });
     socket.on("userJoined", (data) => {
-      toast(`${data.name} has joined the room`);
+      if (currentSong !== null && host)
+        toast(`${data.name} has joined the room`);
+    });
+    socket.on("users", (users) => {
+      setUsers(users);
     });
     socket.on("roomError", () => {
       setInRoom(false);
@@ -97,9 +101,12 @@ const Provider = ({ children }) => {
     return () => {
       socket.off("updateQueue");
       socket.off("userJoined");
+      socket.off("users");
+      socket.off("roomError");
+      socket.off("disconnect");
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [queue, currentSong]);
+  }, [queue, currentSong, user, users]);
 
   const value = {
     createRoom,
@@ -110,9 +117,10 @@ const Provider = ({ children }) => {
     addToQueue,
     setRoom,
     inRoom,
-    onError,
+    onPlaybackError,
     randomIcon,
     setHost,
+    users,
   };
   return <Context.Provider value={value}>{children}</Context.Provider>;
 };

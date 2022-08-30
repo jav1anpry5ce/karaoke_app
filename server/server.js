@@ -44,6 +44,7 @@ io.on("connection", (socket) => {
       };
       room.users.push(user);
       io.to(roomData.roomId).emit("userJoined", user);
+      io.to(roomData.roomId).emit("users", room.users);
       socket.join(roomData.roomId);
     } else {
       socket.emit("roomError", { message: "Room not found" });
@@ -61,16 +62,25 @@ io.on("connection", (socket) => {
     }
   });
   socket.on("reconnect", (data) => {
-    // socket.join(data.roomId);
+    const room = rooms.find((r) => r.id === data.roomId);
+    if (room) {
+      const user = {
+        socketId: socket.id,
+        ...data.user,
+      };
+      room.users.push(user);
+      socket.join(data.roomId);
+      io.to(data.roomId).emit("users", room.users);
+    }
   });
   socket.on("disconnect", () => {
-    const room = rooms.find((r) => r.users.find((u) => u.id === socket.id));
+    const room = rooms.find((r) =>
+      r.users.find((u) => u.socketId === socket.id)
+    );
     if (room) {
-      const user = room.users.find((u) => u.id === socket.id);
-      room.users = room.users.filter((u) => u.id !== socket.id);
-      io.to(room.id).emit("userLeft", user);
+      room.users = room.users.filter((u) => u.socketId !== socket.id);
+      io.to(room.id).emit("users", room.users);
     }
-    console.log("disconnected");
   });
 });
 

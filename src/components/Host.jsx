@@ -1,14 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import ReactPlayer from "react-player";
 import QueueCard from "./QueueCard";
 import { useParams } from "react-router-dom";
 import { Context } from "../context/AppContext";
 import { AnimatePresence } from "framer-motion";
+import QRCode from "react-qr-code";
+import UserCard from "./UserCard";
+import { motion } from "framer-motion";
 
 export default function Host() {
   const params = useParams();
-  const { queue, currentSong, updateCurrentSong, onError } =
+  const { queue, currentSong, updateCurrentSong, onPlaybackError, users } =
     useContext(Context);
+  const [url] = useState(`http://10.0.0.233:3000/join?room=${params.id}`);
   return (
     <main className="h-screen overflow-hidden bg-[url(./assets/images/party.jpg)] bg-cover object-center">
       <div className="relative h-full bg-black/60">
@@ -23,13 +27,28 @@ export default function Host() {
                 className="aspect-video"
                 playing
                 onEnded={updateCurrentSong}
-                onError={onError}
+                onError={onPlaybackError}
               />
             ) : (
               <div className="absolute left-[50%] flex h-full -translate-x-[50%] flex-col items-center justify-center">
-                <h1 className="text-3xl font-bold text-white">
-                  No song currently playing
-                </h1>
+                <div className="flex flex-col items-center gap-5">
+                  <motion.div
+                    layout="position"
+                    className="rounded bg-white p-1"
+                  >
+                    <QRCode value={url} size={360} />
+                  </motion.div>
+                  <motion.div
+                    layout="position"
+                    className="flex max-w-[1020px] flex-wrap gap-3"
+                  >
+                    <AnimatePresence>
+                      {users.map((user) => (
+                        <UserCard key={user.id} user={user} />
+                      ))}
+                    </AnimatePresence>
+                  </motion.div>
+                </div>
               </div>
             )}
             {currentSong && <QueueCard queueData={currentSong} />}
