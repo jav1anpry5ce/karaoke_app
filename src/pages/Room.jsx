@@ -4,13 +4,14 @@ import { Guest, Host } from "../components";
 import { Context } from "../context/AppContext";
 
 export default function Room() {
-  const { createRoom, setRoom } = useContext(Context);
+  const { createRoom, setRoom, setHost } = useContext(Context);
   const location = useLocation();
   const params = useParams();
   const state = location.state;
   useEffect(() => {
     if (state?.host) {
       createRoom(params.id);
+      setHost(true);
     }
     setRoom(params.id);
     // eslint-disable-next-line react-hooks/exhaustive-deps

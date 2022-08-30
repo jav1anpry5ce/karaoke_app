@@ -37,7 +37,8 @@ io.on("connection", (socket) => {
     const room = rooms.find((r) => r.id === roomData.roomId);
     if (room) {
       const user = {
-        id: socket.id,
+        socketId: socket.id,
+        id: roomData.user.id,
         name: roomData.user.name,
         image: roomData.user.image,
       };
@@ -51,13 +52,16 @@ io.on("connection", (socket) => {
   socket.on("addToQueue", (data) => {
     const room = rooms.find((r) => r.id === data.roomId);
     if (room) {
-      const user = room.users.find((u) => u.id === socket.id);
+      const user = room.users.find((u) => u.socketId === socket.id);
       const queueData = {
         user,
         song: data.song,
       };
       io.to(data.roomId).emit("updateQueue", queueData);
     }
+  });
+  socket.on("reconnect", (data) => {
+    // socket.join(data.roomId);
   });
   socket.on("disconnect", () => {
     const room = rooms.find((r) => r.users.find((u) => u.id === socket.id));
@@ -66,6 +70,7 @@ io.on("connection", (socket) => {
       room.users = room.users.filter((u) => u.id !== socket.id);
       io.to(room.id).emit("userLeft", user);
     }
+    console.log("disconnected");
   });
 });
 

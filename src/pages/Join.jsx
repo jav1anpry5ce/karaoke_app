@@ -2,6 +2,7 @@ import React, { useContext, useRef } from "react";
 import { TbArrowsRandom } from "react-icons/tb";
 import { Context } from "../context/AppContext";
 import { useNavigate } from "react-router-dom";
+const shortid = require("shortid");
 
 export default function Join() {
   const navigate = useNavigate();
@@ -12,6 +13,7 @@ export default function Join() {
     const data = {
       roomId: e.target.room.value.toUpperCase(),
       user: {
+        id: shortid.generate(),
         name: e.target.name.value,
         image: e.target.image.value,
       },

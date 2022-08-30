@@ -11,6 +11,8 @@ const Provider = ({ children }) => {
   const [queue, setQueue] = useState([]);
   const [currentSong, setCurrentSong] = useState(null);
   const [room, setRoom] = useState(null);
+  const [host, setHost] = useState(null);
+  const [user, setUser] = useState(null);
   const [inRoom, setInRoom] = useState(false);
 
   // Functions
@@ -31,6 +33,7 @@ const Provider = ({ children }) => {
 
   const joinRoom = (data) => {
     setInRoom(true);
+    setUser(data);
     socket.emit("joinRoom", data);
   };
 
@@ -66,20 +69,25 @@ const Provider = ({ children }) => {
 
   // Socket events
   useEffect(() => {
+    socket.on("disconnect", () => {
+      socket.connect();
+      socket.emit("reconnect", user);
+    });
     socket.on("updateQueue", (data) => {
       if (!currentSong) {
         setCurrentSong(data);
       } else {
-        const inQueue = queue.find((item) => item.user.id === data.user.id);
-        if (!inQueue) {
-          updateQueue(data);
-        } else {
-          toast.info(`${data.user.name} is being a greedy bottom!`);
+        if (host) {
+          const inQueue = queue.find((item) => item.user.id === data.user.id);
+          if (!inQueue) {
+            updateQueue(data);
+          } else {
+            toast.info(`${data.user.name} is being a greedy bottom!`);
+          }
         }
       }
     });
     socket.on("userJoined", (data) => {
-      console.log(data);
       toast(`${data.name} has joined the room`);
     });
     socket.on("roomError", () => {
@@ -104,6 +112,7 @@ const Provider = ({ children }) => {
     inRoom,
     onError,
     randomIcon,
+    setHost,
   };
   return <Context.Provider value={value}>{children}</Context.Provider>;
 };

@@ -28,7 +28,7 @@ export default function Guest() {
       url: "https://youtube138.p.rapidapi.com/search/",
       params: { q: query + " karaoke", hl: "en", gl: "US" },
       headers: {
-        "X-RapidAPI-Key": "3551a99878msh4a71547f36ae5d2p1ce7e9jsnde95b48df664",
+        "X-RapidAPI-Key": process.env.REACT_APP_RAPID_API_KEY,
         "X-RapidAPI-Host": "youtube138.p.rapidapi.com",
       },
     };

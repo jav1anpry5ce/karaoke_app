@@ -17,7 +17,7 @@ export default function QueueCard({ queueData, side }) {
           "https://www.pngitem.com/pimgs/m/35-350426_profile-icon-png-default-profile-picture-png-transparent.png"
         }
         alt="profile"
-        className="h-[80px] w-[80px] rounded-full object-cover"
+        className="h-[80px] w-[80px] rounded-full object-cover object-center"
       />
       {side ? (
         <div className="flex flex-col">
