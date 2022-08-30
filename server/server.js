@@ -1,5 +1,6 @@
 const { createServer } = require("http");
 const { Server } = require("socket.io");
+const { instrument } = require("@socket.io/admin-ui");
 require("dotenv").config();
 
 const server = createServer();
@@ -14,18 +15,10 @@ const io = new Server(server, {
 const rooms = [];
 
 io.on("connection", (socket) => {
-  socket.on("ownerId", (roomId) => {
-    const ownerId = rooms.find((room) => room.id === roomId);
-    if (ownerId) {
-      socket.emit("ownerId", ownerId.host);
-    } else {
-      socket.emit("ownerId", false);
-    }
-  });
   socket.on("createRoom", (roomData) => {
     const room = {
       id: roomData.roomId,
-      host: roomData.ownerId,
+      host: socket.id,
       users: [],
     };
     if (!rooms.find((r) => r.id === room.id)) {
@@ -33,6 +26,7 @@ io.on("connection", (socket) => {
     }
     socket.join(roomData.roomId);
   });
+
   socket.on("joinRoom", (roomData) => {
     const room = rooms.find((r) => r.id === roomData.roomId);
     if (room) {
@@ -43,13 +37,14 @@ io.on("connection", (socket) => {
         image: roomData.user.image,
       };
       room.users.push(user);
-      io.to(roomData.roomId).emit("userJoined", user);
-      io.to(roomData.roomId).emit("users", room.users);
+      io.to(room.host).emit("userJoined", user);
+      io.to(room.host).emit("users", room.users);
       socket.join(roomData.roomId);
     } else {
       socket.emit("roomError", { message: "Room not found" });
     }
   });
+
   socket.on("addToQueue", (data) => {
     const room = rooms.find((r) => r.id === data.roomId);
     if (room) {
@@ -58,9 +53,10 @@ io.on("connection", (socket) => {
         user,
         song: data.song,
       };
-      io.to(data.roomId).emit("updateQueue", queueData);
+      io.to(room.host).emit("updateQueue", queueData);
     }
   });
+
   socket.on("reconnect", (data) => {
     const room = rooms.find((r) => r.id === data.roomId);
     if (room) {
@@ -70,18 +66,33 @@ io.on("connection", (socket) => {
       };
       room.users.push(user);
       socket.join(data.roomId);
-      io.to(data.roomId).emit("users", room.users);
+      io.to(room.host).emit("users", room.users);
     }
   });
+
+  socket.on("leaveRoom", (roomId) => {
+    socket.leave(roomId);
+  });
+
   socket.on("disconnect", () => {
-    const room = rooms.find((r) =>
-      r.users.find((u) => u.socketId === socket.id)
-    );
-    if (room) {
-      room.users = room.users.filter((u) => u.socketId !== socket.id);
-      io.to(room.id).emit("users", room.users);
+    const host = rooms.find((r) => r.host === socket.id);
+    if (host) {
+      rooms.splice(rooms.indexOf(host), 1);
+      io.to(host.id).emit("roomClosed");
+    } else {
+      const room = rooms.find((r) =>
+        r.users.find((u) => u.socketId === socket.id)
+      );
+      if (room) {
+        room.users = room.users.filter((u) => u.socketId !== socket.id);
+        io.to(room.host).emit("users", room.users);
+      }
     }
   });
+});
+
+instrument(io, {
+  auth: false,
 });
 
 server.listen(process.env.PORT || 5000, process.env.IP, () =>

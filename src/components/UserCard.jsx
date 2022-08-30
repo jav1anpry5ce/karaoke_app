@@ -4,18 +4,18 @@ import { motion } from "framer-motion";
 export default function UserCard({ user }) {
   return (
     <motion.div
-      layout
+      layout="position"
       animate={{ opacity: 1 }}
       initial={{ opacity: 0 }}
       exit={{ opacity: 0 }}
-      className="flex items-center gap-4 rounded-lg bg-black/70 px-4 py-1 text-white shadow shadow-black/70"
+      className="flex items-center gap-4 overflow-hidden rounded bg-black/90 text-white shadow shadow-black"
     >
       <img
         src={user?.image}
         alt="profile"
-        className="h-[60px] w-[60px] rounded-full object-cover object-center"
+        className="h-[80px] w-[80px] object-cover object-center"
       />
-      <p className="text-lg font-bold">{user.name}</p>
+      <p className="p-4 text-xl font-medium uppercase">{user.name}</p>
     </motion.div>
   );
 }

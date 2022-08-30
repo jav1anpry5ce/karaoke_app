@@ -33,10 +33,10 @@ export default function Join() {
 
   return (
     <main className="h-screen overflow-hidden bg-[url(./assets/images/party.jpg)] bg-cover bg-fixed bg-right-top">
-      <div className="flex h-full w-full flex-col items-center justify-center bg-black/40 p-4">
+      <div className="flex h-full w-full flex-col items-center justify-center gap-4 bg-black/70 p-4">
         <form
           ref={ref}
-          className="flex w-full flex-col gap-3 rounded bg-white/60 p-2 shadow-lg"
+          className="container flex w-full max-w-[560px] flex-col gap-3 rounded bg-white p-2 shadow-lg"
           onSubmit={submit}
         >
           <div>
@@ -68,7 +68,7 @@ export default function Join() {
           </div>
           <button
             type="submit"
-            className="w-full rounded-md bg-violet-600 px-4 py-2 font-bold text-white"
+            className="w-full rounded-md bg-violet-700 px-4 py-2 font-bold text-white hover:bg-violet-600"
           >
             Join Room
           </button>

@@ -2,7 +2,6 @@ import { createContext, useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import { toast } from "react-toastify";
 import { Icons } from "../utils/ImageList";
-const shortid = require("shortid");
 
 const Context = createContext();
 const socket = io("http://10.0.0.233:5000");
@@ -15,20 +14,22 @@ const Provider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [users, setUsers] = useState([]);
   const [inRoom, setInRoom] = useState(false);
+  const [mobile, setMobile] = useState(false);
+
+  useEffect(() => {
+    if (
+      /Android|webOS|iPhone|iPod|BlackBerry|IEMobile/i.test(navigator.userAgent)
+    ) {
+      setMobile(true);
+    } else {
+      setMobile(false);
+    }
+  }, []);
 
   // Functions
   const createRoom = (roomId) => {
-    socket.emit("ownerId", roomId);
-    socket.on("ownerId", (ID) => {
-      const OID = sessionStorage.getItem("_OID");
-      if (OID !== ID) {
-        const ownerId = shortid.generate();
-        sessionStorage.setItem("_OID", ownerId);
-      }
-    });
     socket.emit("createRoom", {
-      roomId: roomId.toUpperCase(),
-      ownerId: sessionStorage.getItem("_OID"),
+      roomId,
     });
   };
 
@@ -36,6 +37,13 @@ const Provider = ({ children }) => {
     setInRoom(true);
     setUser(data);
     socket.emit("joinRoom", data);
+  };
+
+  const leaveRoom = () => {
+    setInRoom(false);
+    setUser(null);
+    socket.emit("leaveRoom", room);
+    window.location.href = "/join";
   };
 
   const updateQueue = (data) => {
@@ -56,6 +64,7 @@ const Provider = ({ children }) => {
   };
 
   const addToQueue = (song) => {
+    toast(`${song.title} added to queue`);
     const data = {
       roomId: room,
       song,
@@ -96,6 +105,13 @@ const Provider = ({ children }) => {
     });
     socket.on("roomError", () => {
       setInRoom(false);
+      setUser(null);
+      alert("Room does not exist");
+      window.location.replace("/join");
+    });
+    socket.on("roomClosed", () => {
+      socket.emit("leaveRoom", room);
+      setInRoom(false);
       window.location.href = "/join";
     });
     return () => {
@@ -103,14 +119,16 @@ const Provider = ({ children }) => {
       socket.off("userJoined");
       socket.off("users");
       socket.off("roomError");
+      socket.off("roomClosed");
       socket.off("disconnect");
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [queue, currentSong, user, users]);
+  }, [queue, currentSong, user, users, room]);
 
   const value = {
     createRoom,
     joinRoom,
+    leaveRoom,
     queue,
     currentSong,
     updateCurrentSong,
@@ -121,6 +139,7 @@ const Provider = ({ children }) => {
     randomIcon,
     setHost,
     users,
+    mobile,
   };
   return <Context.Provider value={value}>{children}</Context.Provider>;
 };

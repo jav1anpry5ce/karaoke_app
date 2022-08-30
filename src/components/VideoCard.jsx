@@ -7,15 +7,17 @@ export default function VideoCard({ data }) {
 
   return (
     <div
-      className="w-full max-w-[380px] overflow-hidden rounded bg-black/80 text-white"
+      className="max-w-[380px] cursor-pointer overflow-clip rounded bg-gray-900 text-white hover:bg-gray-800 hover:shadow-xl"
       onClick={() => addToQueue(video)}
     >
       <img
         src={video?.thumbnails[0].url}
         alt="thumbnail"
-        className="h-full w-full object-cover"
+        className="object-cover"
+        height={280}
+        width={380}
       />
-      <p className="p-2 font-bold">{video?.title}</p>
+      <p className="px-2 py-3">{video?.title}</p>
     </div>
   );
 }

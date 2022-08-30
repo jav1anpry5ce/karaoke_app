@@ -15,7 +15,7 @@ export default function Host() {
   const [url] = useState(`http://10.0.0.233:3000/join?room=${params.id}`);
   return (
     <main className="h-screen overflow-hidden bg-[url(./assets/images/party.jpg)] bg-cover object-center">
-      <div className="relative h-full bg-black/60">
+      <div className="relative h-full bg-black/80">
         <div className="flex h-full justify-between gap-8 p-4">
           <div className="flex w-[70%] flex-col gap-4">
             {currentSong ? (

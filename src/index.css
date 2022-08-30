@@ -1,7 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
 
+* {
+  font-family: 'Noto Sans', sans-serif;
+}
 
 @layer base {
     [type='text'],
@@ -19,5 +23,19 @@
     textarea,
     select {
         @apply w-full rounded border-gray-300 font-semibold text-gray-700;
+    }
+}
+
+@layer utilities {
+    .gradient-text {
+        background: linear-gradient(
+  to right,
+  #cfab0e,
+  #cf8b0e 35%,
+  #cf5e0e 55%,
+  #cf480e
+);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
 }
