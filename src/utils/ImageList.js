@@ -14,6 +14,10 @@ const Icons = [
   "https://deadline.com/wp-content/uploads/2022/08/Screen-Shot-2022-08-03-at-2.05.32-PM.png?w=681&h=383&crop=1",
   "https://www.thelist.com/img/gallery/how-victoria-porkchop-parker-left-a-lasting-impact-on-rupauls-drag-race/l-intro-1652828470.jpg",
   "https://i.ytimg.com/vi/9CjlRIfpx1U/maxresdefault.jpg",
+  "https://thumb.spokesman.com/jaUk8KfOafH-K0bLGfQkxC66Vac=/1200x800/smart/media.spokesman.com/photos/2020/06/26/Bob_the_Drag_Queen_cropped.jpg",
+  "https://i.pinimg.com/originals/cc/ea/62/ccea623c90ffc28882995937acf5014e.jpg",
+  "https://dazedimg-dazedgroup.netdna-ssl.com/900/azure/dazed-prod/1280/3/1283985.jpg",
+  "https://64.media.tumblr.com/67a9ebb5f8a3697b3b04c9ec7f9fca85/tumblr_inline_p7gkcqmIPf1robswo_500.png",
 ];
 
 export { Icons };
