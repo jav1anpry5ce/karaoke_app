@@ -1,13 +1,14 @@
-import React, { useContext, useEffect, useRef } from "react";
-import { TbArrowsRandom } from "react-icons/tb";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Context } from "../context/AppContext";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import RenderIcon from "../components/RenderIcon";
 const shortid = require("shortid");
 
 export default function Join() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const { joinRoom, randomIcon } = useContext(Context);
+  const { joinRoom, randomIcon, mobile } = useContext(Context);
+  const [selectedIcon, setSelectedIcon] = useState(null);
   const ref = useRef();
   const submit = (e) => {
     e.preventDefault();
@@ -16,19 +17,16 @@ export default function Join() {
       user: {
         id: shortid.generate(),
         name: e.target.name.value,
-        image: e.target.image.value,
+        image: selectedIcon || randomIcon(),
       },
     };
     joinRoom(data);
     navigate(`/room/${data.roomId}`);
   };
-  const setIcon = () => {
-    const icon = randomIcon();
-    ref.current.image.value = icon;
-  };
 
   useEffect(() => {
     ref.current.room.value = searchParams.get("room");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   return (
@@ -51,21 +49,12 @@ export default function Join() {
             </label>
             <input type="text" name="name" required />
           </div>
-          <div>
-            <label className="mb-2 block text-sm font-bold" htmlFor="image">
-              Image url
-            </label>
-            <div className="relative inline-flex w-full items-center justify-center overflow-hidden">
-              <input type="url" name="image" required />
-              <button
-                type="button"
-                onClick={setIcon}
-                className="absolute right-0 bg-gray-800 p-4"
-              >
-                <TbArrowsRandom fontSize={20} color="#fff" />
-              </button>
-            </div>
-          </div>
+          <RenderIcon
+            selectedIcon={selectedIcon}
+            setSelectedIcon={setSelectedIcon}
+            mobile={mobile}
+          />
+          <input type="hidden" name="image" required />
           <button
             type="submit"
             className="w-full rounded-md bg-violet-700 px-4 py-2 font-bold text-white hover:bg-violet-600"
