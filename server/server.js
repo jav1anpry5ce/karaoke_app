@@ -74,6 +74,14 @@ io.on("connection", (socket) => {
     socket.leave(roomId);
   });
 
+  socket.on("closeRoom", (roomId) => {
+    const host = rooms.find((r) => r.id === roomId);
+    if (host) {
+      rooms.splice(rooms.indexOf(host), 1);
+      io.to(host.id).emit("roomClosed");
+    }
+  });
+
   socket.on("disconnect", () => {
     const host = rooms.find((r) => r.host === socket.id);
     if (host) {

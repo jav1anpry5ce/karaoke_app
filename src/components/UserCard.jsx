@@ -8,7 +8,7 @@ export default function UserCard({ user }) {
       animate={{ opacity: 1 }}
       initial={{ opacity: 0 }}
       exit={{ opacity: 0 }}
-      className="flex items-center gap-4 overflow-hidden rounded bg-black/90 text-white shadow shadow-black"
+      className="flex min-w-[280px] items-center gap-4 overflow-hidden rounded bg-black/90 text-white shadow shadow-black"
     >
       <img
         src={user?.image}

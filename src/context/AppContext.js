@@ -46,6 +46,11 @@ const Provider = ({ children }) => {
     window.location.href = "/join";
   };
 
+  const closeRoom = () => {
+    socket.emit("closeRoom", room);
+    window.location.replace("/");
+  };
+
   const updateQueue = (data) => {
     setQueue((queue) => [...queue, data]);
   };
@@ -97,8 +102,7 @@ const Provider = ({ children }) => {
       }
     });
     socket.on("userJoined", (data) => {
-      if (currentSong !== null && host)
-        toast(`${data.name} has joined the room`);
+      if (currentSong && host) toast(`${data.name} has joined the room`);
     });
     socket.on("users", (users) => {
       setUsers(users);
@@ -129,6 +133,7 @@ const Provider = ({ children }) => {
     createRoom,
     joinRoom,
     leaveRoom,
+    closeRoom,
     queue,
     currentSong,
     updateCurrentSong,
