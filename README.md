@@ -1,4 +1,4 @@
-# Getting Started with SMASH KARAOKE
+# Getting Started with Karaoke App
 
 ## Available Scripts
 

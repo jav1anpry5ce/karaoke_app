@@ -1,4 +1,4 @@
-# Getting Started with SMASH KARAOKE SERVER
+# Getting Started with Karaoke server
 
 ## Available Scripts
 
