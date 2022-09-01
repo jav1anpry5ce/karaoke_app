@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import { toast } from "react-toastify";
-import { Icons } from "../utils/ImageList";
+import { Icons } from "../utils/HelperArrays";
 
 const Context = createContext();
 const socket = io("http://10.0.0.233:5000");

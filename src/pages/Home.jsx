@@ -1,10 +1,42 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Ball } from "../components";
 import Header from "../components/Header";
+import { Link } from "react-router-dom";
+import { Context } from "../context/AppContext";
+import { Balls } from "../utils/HelperArrays";
 
 export default function Home() {
+  const { mobile } = useContext(Context);
   return (
-    <div>
+    <main className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#0a388e] to-[#004b68]">
       <Header />
-    </div>
+      {Balls.map((ball, index) => (
+        <Ball key={index} {...ball} />
+      ))}
+      <div className="relative flex h-[93vh] items-center justify-center overflow-hidden">
+        <div className="z-10 flex flex-col items-center gap-8 p-4">
+          <h1 className="text-center text-3xl font-bold capitalize leading-relaxed text-white lg:text-7xl">
+            Sing along with friends
+          </h1>
+          <div className="flex items-center gap-4">
+            {!mobile && (
+              <Link
+                to={`/room/${Math.floor(100000 + Math.random() * 900000)}`}
+                state={{ host: true }}
+                className="rounded border border-pink-400 bg-transparent py-3 px-4 text-lg font-bold text-white shadow-lg transition duration-300 ease-out hover:bg-pink-400"
+              >
+                Create a Room
+              </Link>
+            )}
+            <Link
+              to="/join"
+              className="rounded border border-violet-400 bg-transparent py-3 px-4 text-lg font-bold text-white shadow-lg transition duration-300 ease-in-out hover:bg-violet-400"
+            >
+              Join a Room
+            </Link>
+          </div>
+        </div>
+      </div>
+    </main>
   );
 }

@@ -1,4 +1,4 @@
-import { Icons } from "../utils/ImageList";
+import { Icons } from "../utils/HelperArrays";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 
 import React, { useRef } from "react";
