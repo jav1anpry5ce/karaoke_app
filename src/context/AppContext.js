@@ -69,7 +69,6 @@ const Provider = ({ children }) => {
   };
 
   const addToQueue = (song) => {
-    toast(`${song.title} added to queue`);
     const data = {
       roomId: room,
       song,
