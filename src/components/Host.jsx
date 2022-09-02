@@ -18,7 +18,9 @@ export default function Host() {
     users,
     closeRoom,
   } = useContext(Context);
-  const [url] = useState(`http://10.0.0.233:3000/join?room=${params.id}`);
+  const [url] = useState(
+    `https://karaoke-app-nu.vercel.app//join?room=${params.id}`
+  );
 
   useEffect(() => {
     return () => closeRoom();
