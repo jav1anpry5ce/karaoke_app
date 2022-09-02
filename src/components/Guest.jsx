@@ -1,6 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import { BiExit } from "react-icons/bi";
+import { AiOutlineClose } from "react-icons/ai";
 import axios from "axios";
 import VideoCard from "./VideoCard";
 import { BounceLoader } from "react-spinners";
@@ -54,6 +55,12 @@ export default function Guest() {
               placeholder="Song Search..."
               className="w-full appearance-none overflow-hidden bg-transparent p-2 text-white outline-none"
             />
+            <button
+              className="rounded-full bg-slate-500/10 p-3 transition-all duration-200 ease-in-out hover:bg-red-600"
+              type="button"
+            >
+              <AiOutlineClose />
+            </button>
             <button type="submit" className="overflow-hidden bg-gray-900 px-4">
               <BsSearch fontSize={24} />
             </button>
