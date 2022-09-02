@@ -20,7 +20,7 @@ export default function Host() {
   } = useContext(Context);
   const [url] = useState(
     process.env.NODE_ENV === "development"
-      ? `http://localhost:3000/join?room=${params.id}`
+      ? `http://10.0.0.233:3000/join?room=${params.id}`
       : `${process.env.REACT_APP_PRODUCTION_URL}join?room=${params.id}`
   );
 
