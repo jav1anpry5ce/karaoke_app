@@ -42,8 +42,8 @@ export default function Host() {
                 onError={onPlaybackError}
               />
             ) : (
-              <div className="absolute left-[50%] flex h-full -translate-x-[50%] flex-col items-center justify-center">
-                <div className="flex flex-col items-center gap-5">
+              <div className="absolute left-[50%] flex h-full w-screen -translate-x-[50%] flex-col items-center justify-center">
+                <div className="flex w-full flex-col items-center gap-5">
                   <motion.div
                     layout="position"
                     className="rounded bg-white p-1"
@@ -52,7 +52,7 @@ export default function Host() {
                   </motion.div>
                   <motion.div
                     layout="position"
-                    className="flex max-w-[1020px] flex-wrap gap-3"
+                    className="flex max-w-full flex-wrap items-center justify-center gap-3 px-4"
                   >
                     <AnimatePresence>
                       {users.map((user) => (

@@ -28,7 +28,7 @@ const Balls = [
     right: 10,
     x: [0, 35, 0, -175],
     y: [0, -15, 0, 200],
-    duration: 5,
+    duration: 15,
   },
   {
     size: 450,
@@ -38,7 +38,7 @@ const Balls = [
     left: 0,
     x: [0, 75, 0],
     y: [0, -50, 0],
-    duration: 3,
+    duration: 17,
   },
   {
     size: 300,
@@ -48,7 +48,7 @@ const Balls = [
     left: 350,
     x: [0, 115, 0, 75, 0],
     y: [0, 25, 0, -35, 15],
-    duration: 7,
+    duration: 19,
   },
   {
     size: 650,
@@ -58,7 +58,7 @@ const Balls = [
     right: 450,
     x: [0, -25, 0, 75],
     y: [0, -50, 0, 100],
-    duration: 15,
+    duration: 21,
   },
   {
     size: 500,
@@ -68,7 +68,7 @@ const Balls = [
     left: 300,
     x: [0, -95, 0, 185],
     y: [0, 50, 0, 275],
-    duration: 9,
+    duration: 23,
   },
   {
     size: 500,
@@ -78,7 +78,7 @@ const Balls = [
     right: 650,
     x: [0, 350, 0, 95],
     y: [0, 98, 0, -275],
-    duration: 15,
+    duration: 25,
   },
 ];
 export { Icons, Balls };

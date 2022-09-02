@@ -22,13 +22,13 @@ export default function RenderIcon({ selectedIcon, setSelectedIcon, mobile }) {
     }
   };
   return (
-    <div className="relative flex flex-col">
+    <div className="group relative flex flex-col">
       <label className="mb-2 block text-sm font-bold capitalize">
         Choose your icon
       </label>
       {!mobile && (
         <button
-          className="absolute left-0 top-[50%] bg-black/30 p-1.5 hover:bg-black/80"
+          className="invisible absolute left-0 top-[50%] bg-black/30 p-1.5 transition duration-300 ease-in-out hover:bg-black/80 group-hover:visible"
           type="button"
           onClick={() => handelScroll("left")}
         >
@@ -54,7 +54,7 @@ export default function RenderIcon({ selectedIcon, setSelectedIcon, mobile }) {
       </div>
       {!mobile && (
         <button
-          className="absolute right-0 top-[50%] bg-black/30 p-1.5 hover:bg-black/80"
+          className="invisible absolute right-0 top-[50%] bg-black/30 p-1.5 transition duration-300 ease-in-out hover:bg-black/80 group-hover:visible"
           type="button"
           onClick={() => handelScroll("right")}
         >

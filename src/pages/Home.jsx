@@ -8,14 +8,14 @@ import { Balls } from "../utils/HelperArrays";
 export default function Home() {
   const { mobile } = useContext(Context);
   return (
-    <main className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#0a388e] to-[#004b68]">
+    <main className="relative h-screen overflow-hidden bg-gradient-to-br from-[#0a388e] to-[#004b68]">
       <Header />
       {Balls.map((ball, index) => (
         <Ball key={index} {...ball} />
       ))}
-      <div className="relative flex h-[93vh] items-center justify-center overflow-hidden">
+      <div className="relative flex h-[calc(100vh-68px)] items-center justify-center overflow-hidden">
         <div className="z-10 flex flex-col items-center gap-8 p-4">
-          <h1 className="text-center text-3xl font-bold capitalize leading-relaxed text-white lg:text-7xl">
+          <h1 className="text-center text-2xl font-bold capitalize leading-relaxed text-white lg:text-7xl">
             Sing along with friends
           </h1>
           <div className="flex items-center gap-4">
