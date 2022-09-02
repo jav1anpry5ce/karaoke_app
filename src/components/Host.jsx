@@ -19,7 +19,7 @@ export default function Host() {
     closeRoom,
   } = useContext(Context);
   const [url] = useState(
-    `https://karaoke-app-nu.vercel.app//join?room=${params.id}`
+    `https://smash-karaoke.vercel.app/join?room=${params.id}`
   );
 
   useEffect(() => {
