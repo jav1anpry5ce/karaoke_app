@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { Icons } from "../utils/HelperArrays";
 
 const Context = createContext();
-const socket = io("http://10.0.0.233:5000");
+const socket = io("https://backend.javaughnpryce.live:5000");
 
 const Provider = ({ children }) => {
   const [queue, setQueue] = useState([]);
