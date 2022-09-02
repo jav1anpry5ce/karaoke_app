@@ -19,7 +19,9 @@ export default function Host() {
     closeRoom,
   } = useContext(Context);
   const [url] = useState(
-    `https://smash-karaoke.vercel.app/join?room=${params.id}`
+    process.env.NODE_ENV === "development"
+      ? `http://localhost:3000/join?room=${params.id}`
+      : `${process.env.REACT_APP_PRODUCTION_URL}join?room=${params.id}`
   );
 
   useEffect(() => {
