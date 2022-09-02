@@ -41,6 +41,11 @@ export default function Guest() {
     });
   };
 
+  const clearSearch = () => {
+    ref.current.search.value = "";
+    ref.current.search.focus();
+  };
+
   return (
     <main className="h-screen overflow-hidden bg-[url(./assets/images/party.jpg)] bg-cover bg-right-top">
       <div className="h-full bg-black/70">
@@ -49,15 +54,16 @@ export default function Guest() {
           onSubmit={submit}
           ref={ref}
         >
-          <div className="group inline-flex w-full max-w-[1020px] grow overflow-hidden rounded bg-gray-700/80 font-semibold text-white placeholder-white outline-none focus-within:bg-gray-800/90 focus-within:shadow-md ">
+          <div className="group relative inline-flex w-full max-w-[1020px] grow overflow-hidden rounded bg-gray-700/80 font-semibold text-white placeholder-white outline-none focus-within:bg-gray-800/90 focus-within:shadow-md">
             <input
               name="search"
               placeholder="Song Search..."
               className="w-full appearance-none overflow-hidden bg-transparent p-2 text-white outline-none"
             />
             <button
-              className="rounded-full bg-slate-500/10 p-3 transition-all duration-200 ease-in-out hover:bg-red-600"
+              className="absolute right-14 top-[10%] hidden rounded-full bg-slate-500/10 p-2 transition-all duration-200 ease-in-out hover:bg-red-600 group-focus-within:block"
               type="button"
+              onClick={clearSearch}
             >
               <AiOutlineClose />
             </button>
