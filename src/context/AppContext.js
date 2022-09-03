@@ -15,6 +15,7 @@ const Provider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [inRoom, setInRoom] = useState(false);
   const [mobile, setMobile] = useState(false);
+  const [canNavigate, setCanNavigate] = useState(false);
 
   useEffect(() => {
     if (
@@ -37,6 +38,10 @@ const Provider = ({ children }) => {
     setInRoom(true);
     setUser(data);
     socket.emit("joinRoom", data);
+  };
+
+  const checkIsRoomValid = (data) => {
+    socket.emit("isRoomValid", data);
   };
 
   const leaveRoom = () => {
@@ -117,6 +122,17 @@ const Provider = ({ children }) => {
       setInRoom(false);
       window.location.href = "/join";
     });
+    socket.on("isRoomValid", (data) => {
+      if (data.valid) {
+        console.log(data);
+        joinRoom(data.roomData);
+        setRoom(data.roomData.roomId);
+        setCanNavigate(true);
+      } else {
+        setCanNavigate(false);
+        toast.error("Room does not exist");
+      }
+    });
     return () => {
       socket.off("updateQueue");
       socket.off("userJoined");
@@ -124,6 +140,7 @@ const Provider = ({ children }) => {
       socket.off("roomError");
       socket.off("roomClosed");
       socket.off("disconnect");
+      socket.off("isRoomValid");
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queue, currentSong, user, users, room]);
@@ -131,12 +148,14 @@ const Provider = ({ children }) => {
   const value = {
     createRoom,
     joinRoom,
+    checkIsRoomValid,
     leaveRoom,
     closeRoom,
     queue,
     currentSong,
     updateCurrentSong,
     addToQueue,
+    room,
     setRoom,
     inRoom,
     onPlaybackError,
@@ -144,6 +163,7 @@ const Provider = ({ children }) => {
     setHost,
     users,
     mobile,
+    canNavigate,
   };
   return <Context.Provider value={value}>{children}</Context.Provider>;
 };

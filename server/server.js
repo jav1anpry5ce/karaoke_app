@@ -50,6 +50,15 @@ io.on("connection", (socket) => {
     }
   });
 
+  socket.on("isRoomValid", (data) => {
+    const room = rooms.find((r) => r.id === data.roomId);
+    if (room) {
+      socket.emit("isRoomValid", { valid: true, roomData: data });
+    } else {
+      socket.emit("isRoomValid", { valid: false });
+    }
+  });
+
   socket.on("addToQueue", (data) => {
     const room = rooms.find((r) => r.id === data.roomId);
     if (room) {

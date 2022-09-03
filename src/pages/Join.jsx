@@ -7,7 +7,8 @@ const shortid = require("shortid");
 export default function Join() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const { joinRoom, randomIcon, mobile } = useContext(Context);
+  const { canNavigate, randomIcon, mobile, checkIsRoomValid, room } =
+    useContext(Context);
   const [selectedIcon, setSelectedIcon] = useState(null);
   const ref = useRef();
   const submit = (e) => {
@@ -20,14 +21,22 @@ export default function Join() {
         image: selectedIcon || randomIcon(),
       },
     };
-    joinRoom(data);
-    navigate(`/room/${data.roomId}`);
+    checkIsRoomValid(data);
+    // joinRoom(data);
+    // navigate(`/room/${data.roomId}`);
   };
 
   useEffect(() => {
     ref.current.room.value = searchParams.get("room");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
+
+  useEffect(() => {
+    if (canNavigate && room) {
+      navigate(`/room/${room}`);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [canNavigate, room]);
 
   return (
     <main className="h-screen overflow-hidden bg-[url(./assets/images/party.jpg)] bg-cover bg-fixed bg-right-top">
