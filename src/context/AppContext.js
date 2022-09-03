@@ -124,7 +124,6 @@ const Provider = ({ children }) => {
     });
     socket.on("isRoomValid", (data) => {
       if (data.valid) {
-        console.log(data);
         joinRoom(data.roomData);
         setRoom(data.roomData.roomId);
         setCanNavigate(true);

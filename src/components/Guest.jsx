@@ -74,7 +74,7 @@ export default function Guest() {
           <button
             type="button"
             onClick={leaveRoom}
-            className="inline-flex items-center rounded bg-red-700 py-1 px-3 text-white transition duration-300 ease-in-out hover:translate-x-4 hover:bg-red-600"
+            className="inline-flex items-center rounded bg-red-700 py-1 px-3 text-white transition duration-300 ease-in-out hover:bg-red-600 lg:hover:translate-x-4"
           >
             <span className="hidden md:block">Leave</span>
             <BiExit className="m-0 p-0" fontSize={32} color="#fff" />
