@@ -38,7 +38,7 @@ export default function RenderIcon({ selectedIcon, setSelectedIcon, mobile }) {
 
       <div
         ref={ref}
-        className="flex w-full snap-x snap-mandatory gap-4 overflow-auto scrollbar-hide"
+        className="flex w-full snap-x snap-mandatory gap-2 overflow-auto scrollbar-hide lg:gap-4"
       >
         {Icons.map((icon, index) => (
           <img
