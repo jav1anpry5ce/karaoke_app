@@ -89,9 +89,12 @@ export default function Guest() {
           <div className="flex flex-wrap items-center justify-center gap-3 px-2 pb-3">
             {results &&
               !loading &&
-              results.map((video, index) => (
-                <VideoCard key={index} data={video} />
-              ))}
+              results.map(
+                (video, index) =>
+                  video?.video?.videoId && (
+                    <VideoCard key={index} data={video} />
+                  )
+              )}
           </div>
         </div>
       </div>
