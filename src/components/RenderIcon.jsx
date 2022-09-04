@@ -28,7 +28,7 @@ export default function RenderIcon({ selectedIcon, setSelectedIcon, mobile }) {
       </label>
       {!mobile && (
         <button
-          className="invisible absolute left-0 top-[50%] bg-black/30 p-1.5 transition duration-300 ease-in-out hover:bg-black/80 group-hover:visible"
+          className="absolute left-0 top-[50%] bg-black/30 p-1.5 opacity-0 transition duration-300 ease-in-out hover:bg-black/80 group-hover:opacity-100"
           type="button"
           onClick={() => handelScroll("left")}
         >
@@ -54,7 +54,7 @@ export default function RenderIcon({ selectedIcon, setSelectedIcon, mobile }) {
       </div>
       {!mobile && (
         <button
-          className="invisible absolute right-0 top-[50%] bg-black/30 p-1.5 transition duration-300 ease-in-out hover:bg-black/80 group-hover:visible"
+          className="absolute right-0 top-[50%] bg-black/30 p-1.5 opacity-0 transition duration-300 ease-in-out hover:bg-black/80 group-hover:opacity-100"
           type="button"
           onClick={() => handelScroll("right")}
         >

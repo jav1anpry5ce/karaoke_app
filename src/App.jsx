@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home, Room, Join } from "./pages";
 import { ToastContainer } from "react-toastify";
+import { Provider } from "./context/AppContext";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
@@ -18,12 +19,14 @@ function App() {
         draggable
         pauseOnHover
       />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="room/:id" element={<Room />} />
-        <Route path="join" element={<Join />} />
-        <Route path="*" element={<div>Not Found</div>} />
-      </Routes>
+      <Provider>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="room/:id" element={<Room />} />
+          <Route path="join" element={<Join />} />
+          <Route path="*" element={<div>Not Found</div>} />
+        </Routes>
+      </Provider>
     </BrowserRouter>
   );
 }

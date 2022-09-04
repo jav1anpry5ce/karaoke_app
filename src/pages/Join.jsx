@@ -1,15 +1,13 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Context } from "../context/AppContext";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import RenderIcon from "../components/RenderIcon";
 import JoinHeader from "../components/JoinHeader";
 const shortid = require("shortid");
 
 export default function Join() {
-  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const { canNavigate, randomIcon, mobile, checkIsRoomValid, room } =
-    useContext(Context);
+  const { randomIcon, mobile, checkIsRoomValid } = useContext(Context);
   const [selectedIcon, setSelectedIcon] = useState(null);
   const ref = useRef();
   const submit = (e) => {
@@ -31,13 +29,6 @@ export default function Join() {
     ref.current.room.value = searchParams.get("room");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
-
-  useEffect(() => {
-    if (canNavigate && room) {
-      navigate(`/room/${room}`);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [canNavigate, room]);
 
   return (
     <main className="h-screen overflow-hidden bg-[url(./assets/images/party.jpg)] bg-cover bg-fixed bg-right-top">

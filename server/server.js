@@ -85,7 +85,12 @@ io.on("connection", (socket) => {
   });
 
   socket.on("leaveRoom", (roomId) => {
-    socket.leave(roomId);
+    const room = rooms.find((r) => r.id === roomId);
+    if (room) {
+      room.users = room.users.filter((u) => u.socketId !== socket.id);
+      io.to(room.host).emit("users", room.users);
+      socket.leave(roomId);
+    }
   });
 
   socket.on("closeRoom", (roomId) => {

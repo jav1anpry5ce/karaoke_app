@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import { toast } from "react-toastify";
 import { Icons } from "../utils/HelperArrays";
+import { useNavigate } from "react-router-dom";
 
 const Context = createContext();
 const socket = io("https://backend.javaughnpryce.live:5000");
@@ -15,7 +16,8 @@ const Provider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [inRoom, setInRoom] = useState(false);
   const [mobile, setMobile] = useState(false);
-  const [canNavigate, setCanNavigate] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (
@@ -48,12 +50,12 @@ const Provider = ({ children }) => {
     setInRoom(false);
     setUser(null);
     socket.emit("leaveRoom", room);
-    window.location.href = "/join";
+    navigate("/join");
   };
 
   const closeRoom = () => {
     socket.emit("closeRoom", room);
-    window.location.replace("/");
+    navigate("/");
   };
 
   const updateQueue = (data) => {
@@ -115,20 +117,19 @@ const Provider = ({ children }) => {
       setInRoom(false);
       setUser(null);
       alert("Room does not exist");
-      window.location.replace("/join");
+      navigate("/join");
     });
     socket.on("roomClosed", () => {
       socket.emit("leaveRoom", room);
       setInRoom(false);
-      window.location.href = "/join";
+      navigate("/join");
     });
     socket.on("isRoomValid", (data) => {
       if (data.valid) {
         joinRoom(data.roomData);
         setRoom(data.roomData.roomId);
-        setCanNavigate(true);
+        navigate(`/room/${data.roomData.roomId}`);
       } else {
-        setCanNavigate(false);
         toast.error("Room does not exist");
       }
     });
@@ -162,7 +163,6 @@ const Provider = ({ children }) => {
     setHost,
     users,
     mobile,
-    canNavigate,
   };
   return <Context.Provider value={value}>{children}</Context.Provider>;
 };
