@@ -7,6 +7,7 @@ import { AnimatePresence } from "framer-motion";
 import QRCode from "react-qr-code";
 import UserCard from "./UserCard";
 import { motion } from "framer-motion";
+import RenderCode from "./RenderCode";
 
 export default function Host() {
   const params = useParams();
@@ -70,9 +71,7 @@ export default function Host() {
             {currentSong && <QueueCard queueData={currentSong} />}
           </div>
           <div className="flex w-[30%] flex-col gap-2 overflow-auto pb-2 scrollbar-hide xl:w-[35%]">
-            <h1 className="sticky top-0 bg-black/0 py-4 text-right text-2xl font-bold uppercase tracking-widest text-white backdrop-blur-md">
-              Room: {params.id}
-            </h1>
+            <RenderCode code={params.id} />
             <AnimatePresence>
               {queue.map((queueData) => (
                 <QueueCard
