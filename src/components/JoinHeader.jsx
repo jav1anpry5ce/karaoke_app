@@ -3,7 +3,7 @@ import { AiFillHome } from "react-icons/ai";
 
 export default function JoinHeader() {
   return (
-    <header className="relative overflow-hidden bg-gradient-to-r from-violet-500/5 to-pink-500/5 p-3 text-white shadow-lg">
+    <header className="relative overflow-hidden p-3 text-white shadow-lg">
       <div className="mx-auto flex max-w-6xl items-center justify-between">
         <p className="font-serif font-bold uppercase lg:text-lg">
           Smash Karaoke
