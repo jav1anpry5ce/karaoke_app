@@ -88,6 +88,11 @@ const Provider = ({ children }) => {
     return Icons[random];
   };
 
+  const closeOpenConnections = () => {
+    socket.disconnect();
+    socket.connect();
+  };
+
   // Socket events
   useEffect(() => {
     socket.on("disconnect", () => {
@@ -163,6 +168,7 @@ const Provider = ({ children }) => {
     setHost,
     users,
     mobile,
+    closeOpenConnections,
   };
   return <Context.Provider value={value}>{children}</Context.Provider>;
 };

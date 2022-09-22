@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Ball } from "../components";
 import Header from "../components/Header";
 import { Link } from "react-router-dom";
@@ -6,7 +6,11 @@ import { Context } from "../context/AppContext";
 import { Balls } from "../utils/HelperArrays";
 
 export default function Home() {
-  const { mobile } = useContext(Context);
+  const { mobile, closeOpenConnections } = useContext(Context);
+  useEffect(() => {
+    closeOpenConnections();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <main className="relative h-screen overflow-hidden bg-gradient-to-br from-[#0a388e] to-[#004b68]">
       <Header />
