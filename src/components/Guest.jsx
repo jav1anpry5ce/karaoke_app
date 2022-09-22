@@ -14,6 +14,7 @@ export default function Guest() {
   const ref = useRef();
   const [results, setResults] = useState();
   const [loading, setLoading] = useState(false);
+  const [text, setText] = useState(null);
 
   useEffect(() => {
     if (!inRoom) {
@@ -43,6 +44,7 @@ export default function Guest() {
 
   const clearSearch = () => {
     ref.current.search.value = "";
+    setText(null);
     ref.current.search.focus();
   };
 
@@ -59,14 +61,17 @@ export default function Guest() {
               name="search"
               placeholder="Song Search..."
               className="w-full appearance-none overflow-hidden bg-transparent p-2 text-white outline-none"
+              onChange={(e) => setText(e.target.value)}
             />
-            <button
-              className="absolute right-14 top-[10%] hidden rounded-full bg-slate-500/10 p-2 transition-all duration-200 ease-in-out hover:bg-red-600 group-focus-within:block"
-              type="button"
-              onClick={clearSearch}
-            >
-              <AiOutlineClose />
-            </button>
+            {text && (
+              <button
+                className="absolute right-14 top-[10%] hidden rounded-full bg-slate-500/10 p-2 transition-all duration-200 ease-in-out hover:bg-red-600 group-focus-within:block"
+                type="button"
+                onClick={clearSearch}
+              >
+                <AiOutlineClose />
+              </button>
+            )}
             <button type="submit" className="overflow-hidden bg-gray-900 px-4">
               <BsSearch fontSize={24} />
             </button>
