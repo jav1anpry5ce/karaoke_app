@@ -12,7 +12,7 @@ export default function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <main className="relative h-screen overflow-hidden bg-gradient-to-br from-[#0a388e] to-[#004b68]">
+    <main className="relative h-screen overflow-hidden bg-gradient-to-tl from-[#1d2639] to-[#110921]">
       <Header />
       {Balls.map((ball, index) => (
         <Ball key={index} {...ball} />

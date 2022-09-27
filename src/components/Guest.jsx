@@ -49,8 +49,8 @@ export default function Guest() {
   };
 
   return (
-    <main className="h-screen overflow-hidden bg-[url(./assets/images/party.jpg)] bg-cover bg-right-top">
-      <div className="h-full bg-black/70">
+    <main className="h-screen overflow-hidden bg-gradient-to-bl from-[#1d2639] to-[#110921]">
+      <div className="h-full">
         <form
           className="mx-auto flex items-center justify-center gap-2 p-2"
           onSubmit={submit}

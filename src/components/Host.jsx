@@ -8,6 +8,8 @@ import QRCode from "react-qr-code";
 import UserCard from "./UserCard";
 import { motion } from "framer-motion";
 import RenderCode from "./RenderCode";
+import { Link } from "react-router-dom";
+import { AiFillHome } from "react-icons/ai";
 
 export default function Host() {
   const params = useParams();
@@ -31,8 +33,8 @@ export default function Host() {
   }, []);
 
   return (
-    <main className="h-screen overflow-hidden bg-[url(./assets/images/party.jpg)] bg-cover object-center">
-      <div className="relative h-full bg-black/80">
+    <main className="h-screen overflow-hidden bg-gradient-to-bl from-[#1d2639] to-[#110921]">
+      <div className="relative h-full">
         <div className="flex h-full justify-between gap-8 p-4">
           <div className="flex w-[70%] flex-col gap-4 xl:w-[65%]">
             {currentSong ? (
@@ -53,7 +55,7 @@ export default function Host() {
                     layout="position"
                     className="rounded bg-white p-1"
                   >
-                    <QRCode value={url} size={360} />
+                    <QRCode value={url} size={320} level="H" />
                   </motion.div>
                   <motion.div
                     layout="position"
@@ -71,6 +73,13 @@ export default function Host() {
             {currentSong && <QueueCard queueData={currentSong} />}
           </div>
           <div className="flex w-[30%] flex-col gap-2 overflow-auto pb-2 scrollbar-hide xl:w-[35%]">
+            <Link
+              to="/"
+              className="absolute top-7 left-5 inline-flex items-center gap-2 rounded bg-pink-500 p-2.5 font-semibold text-white hover:shadow-lg hover:shadow-pink-500/40 lg:p-2"
+            >
+              <AiFillHome fontSize={24} />
+              <span className="hidden lg:block">Close Room</span>
+            </Link>
             <RenderCode code={params.id} />
             <AnimatePresence>
               {queue.map((queueData) => (
