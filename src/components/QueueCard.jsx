@@ -21,12 +21,16 @@ export default function QueueCard({ queueData, side }) {
       />
       {side ? (
         <div className="flex flex-col py-2 pr-2">
-          <span className="font-bold capitalize">{song?.title}</span>
+          <span className="truncate text-sm font-bold capitalize">
+            {song?.title}
+          </span>
           <span className="text-sm capitalize text-white/60">{user?.name}</span>
         </div>
       ) : (
         <div className="flex flex-col py-2 pr-2">
-          <p className="text-2xl font-bold capitalize">{song?.title}</p>
+          <p className="truncate text-2xl font-bold capitalize">
+            {song?.title}
+          </p>
           <p className="capitalize text-white/60">{user?.name}</p>
         </div>
       )}

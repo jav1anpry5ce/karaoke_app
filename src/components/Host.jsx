@@ -36,7 +36,7 @@ export default function Host() {
     <main className="h-screen overflow-hidden bg-gradient-to-bl from-[#1d2639] to-[#110921]">
       <div className="relative h-full">
         <div className="flex h-full justify-between gap-8 p-4">
-          <div className="flex w-[70%] flex-col gap-4 xl:w-[65%]">
+          <div className="flex w-[75%] flex-col gap-4">
             {currentSong ? (
               <ReactPlayer
                 url={`https://www.youtube.com/watch?v=${currentSong?.song.videoId}`}
