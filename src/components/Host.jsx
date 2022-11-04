@@ -73,13 +73,15 @@ export default function Host() {
             {currentSong && <QueueCard queueData={currentSong} />}
           </div>
           <div className="flex w-[25%] flex-col gap-2 overflow-hidden pb-2 scrollbar-hide">
-            <Link
-              to="/"
-              className="absolute top-7 left-5 inline-flex items-center gap-2 rounded bg-pink-500 p-2.5 font-semibold text-white hover:shadow-lg hover:shadow-pink-500/40 lg:p-2"
-            >
-              <AiFillHome fontSize={24} />
-              <span className="hidden lg:block">Close Room</span>
-            </Link>
+            {!currentSong && (
+              <Link
+                to="/"
+                className="absolute top-7 left-5 inline-flex items-center gap-2 rounded bg-pink-500 p-2.5 font-semibold text-white hover:shadow-lg hover:shadow-pink-500/40 lg:p-2"
+              >
+                <AiFillHome fontSize={24} />
+                <span className="hidden lg:block">Close Room</span>
+              </Link>
+            )}
             <RenderCode code={params.id} />
             <AnimatePresence>
               {queue.map((queueData) => (
