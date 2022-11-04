@@ -9,7 +9,7 @@ export default function QueueCard({ queueData, side }) {
       animate={{ opacity: 1 }}
       initial={{ opacity: 0 }}
       exit={{ opacity: 0 }}
-      className="flex items-center gap-8 overflow-hidden rounded-r bg-slate-900/95 text-white shadow shadow-black"
+      className="flex w-full items-center gap-2 overflow-hidden rounded bg-slate-900/95 text-white shadow shadow-black/50"
     >
       <img
         src={
@@ -20,17 +20,17 @@ export default function QueueCard({ queueData, side }) {
         className="h-full w-[80px] object-cover object-center"
       />
       {side ? (
-        <div className="flex flex-col py-2 pr-2">
-          <span className="truncate text-sm font-bold capitalize">
+        <div className="flex flex-col py-2">
+          <span className="w-full max-w-[260px] truncate text-sm font-bold capitalize">
             {song?.title}
           </span>
-          <span className="text-sm capitalize text-white/60">{user?.name}</span>
+          <span className="truncate text-sm capitalize text-white/60">
+            {user?.name}
+          </span>
         </div>
       ) : (
-        <div className="flex flex-col py-2 pr-2">
-          <p className="truncate text-2xl font-bold capitalize">
-            {song?.title}
-          </p>
+        <div className="flex flex-col py-2">
+          <p className="truncate text-lg font-bold capitalize">{song?.title}</p>
           <p className="capitalize text-white/60">{user?.name}</p>
         </div>
       )}

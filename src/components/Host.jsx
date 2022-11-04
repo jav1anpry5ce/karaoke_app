@@ -23,7 +23,7 @@ export default function Host() {
   } = useContext(Context);
   const [url] = useState(
     process.env.NODE_ENV === "development"
-      ? `http://10.0.0.233:3000/join?room=${params.id}`
+      ? `http://192.168.1.182:3000/join?room=${params.id}`
       : `${process.env.REACT_APP_PRODUCTION_URL}join?room=${params.id}`
   );
 
@@ -33,9 +33,9 @@ export default function Host() {
   }, []);
 
   return (
-    <main className="h-screen overflow-hidden bg-gradient-to-bl from-[#1d2639] to-[#110921]">
-      <div className="relative h-full">
-        <div className="flex h-full justify-between gap-8 p-4">
+    <main className="h-screen w-screen overflow-hidden bg-gradient-to-bl from-[#1d2639] to-[#110921]">
+      <div className="relative h-full w-screen">
+        <div className="flex h-full justify-between gap-4 p-4">
           <div className="flex w-[75%] flex-col gap-4">
             {currentSong ? (
               <ReactPlayer
@@ -72,7 +72,7 @@ export default function Host() {
             )}
             {currentSong && <QueueCard queueData={currentSong} />}
           </div>
-          <div className="flex w-[30%] flex-col gap-2 overflow-auto pb-2 scrollbar-hide xl:w-[35%]">
+          <div className="flex w-[25%] flex-col gap-2 overflow-hidden pb-2 scrollbar-hide">
             <Link
               to="/"
               className="absolute top-7 left-5 inline-flex items-center gap-2 rounded bg-pink-500 p-2.5 font-semibold text-white hover:shadow-lg hover:shadow-pink-500/40 lg:p-2"
