@@ -91,6 +91,7 @@ const Provider = ({ children }) => {
   const closeOpenConnections = () => {
     socket.disconnect();
     socket.connect();
+    setCurrentSong(null);
   };
 
   // Socket events
@@ -107,7 +108,7 @@ const Provider = ({ children }) => {
           if (!inQueue) {
             updateQueue(data);
           } else {
-            toast.info(`${data.user.name} is being a greedy bottom!`);
+            toast.info(`${data.user.name} thinks they're a Pop Star!`);
           }
         }
       }

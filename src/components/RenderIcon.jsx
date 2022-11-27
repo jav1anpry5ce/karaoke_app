@@ -49,6 +49,7 @@ export default function RenderIcon({ selectedIcon, setSelectedIcon, mobile }) {
             className={`h-[80px] w-[80px] cursor-pointer snap-start snap-normal rounded object-cover transition duration-200 ease-in-out lg:h-[120px] lg:w-[120px] lg:hover:border-[3px] lg:hover:border-blue-500 ${
               selectedIcon === icon && "border-[3px] border-blue-500"
             }`}
+            loading="lazy"
           />
         ))}
       </div>

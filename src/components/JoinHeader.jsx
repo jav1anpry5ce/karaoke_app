@@ -10,7 +10,7 @@ export default function JoinHeader() {
         </p>
         <Link
           to="/"
-          className="inline-flex items-center gap-2 rounded bg-pink-500 p-2.5 font-semibold hover:shadow-lg hover:shadow-pink-500/40 lg:p-2"
+          className="inline-flex items-center gap-2 rounded bg-pink-500 p-2.5 font-semibold hover:shadow-md hover:shadow-pink-500/40 lg:p-2"
         >
           <AiFillHome fontSize={24} />
           <span className="hidden lg:block">Return Home</span>
