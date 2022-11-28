@@ -16,6 +16,7 @@ const Provider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [inRoom, setInRoom] = useState(false);
   const [mobile, setMobile] = useState(false);
+  const [countdown, setCountdown] = useState(false);
 
   const navigate = useNavigate();
 
@@ -63,6 +64,7 @@ const Provider = ({ children }) => {
   };
 
   const updateCurrentSong = () => {
+    setCountdown(false);
     const song = queue[0];
     setCurrentSong(song);
     setQueue((queue) => queue.slice(1));
@@ -92,6 +94,17 @@ const Provider = ({ children }) => {
     socket.disconnect();
     socket.connect();
     setCurrentSong(null);
+    setQueue([]);
+    setUsers([]);
+    setRoom(null);
+  };
+
+  const startCountdown = () => {
+    if (queue.length > 0) {
+      setCountdown(true);
+    } else {
+      updateCurrentSong();
+    }
   };
 
   // Socket events
@@ -170,6 +183,8 @@ const Provider = ({ children }) => {
     users,
     mobile,
     closeOpenConnections,
+    countdown,
+    startCountdown,
   };
   return <Context.Provider value={value}>{children}</Context.Provider>;
 };

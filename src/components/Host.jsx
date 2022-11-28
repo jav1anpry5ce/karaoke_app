@@ -10,13 +10,14 @@ import { motion } from "framer-motion";
 import RenderCode from "./RenderCode";
 import { Link } from "react-router-dom";
 import { AiFillHome } from "react-icons/ai";
+import SongCountdown from "./SongCountdown";
 
 export default function Host() {
   const params = useParams();
   const {
     queue,
     currentSong,
-    updateCurrentSong,
+    startCountdown,
     onPlaybackError,
     users,
     closeRoom,
@@ -37,6 +38,7 @@ export default function Host() {
       <div className="relative h-full w-screen">
         <div className="flex h-full justify-between gap-4 p-4">
           <div className="flex w-[75%] flex-col gap-4">
+            <SongCountdown />
             {currentSong ? (
               <ReactPlayer
                 url={`https://www.youtube.com/watch?v=${currentSong?.song.videoId}`}
@@ -45,12 +47,22 @@ export default function Host() {
                 height="100%"
                 className="aspect-video"
                 playing
-                onEnded={updateCurrentSong}
+                onEnded={startCountdown}
                 onError={onPlaybackError}
+                config={{
+                  youtube: {
+                    playerVars: {
+                      controls: 0,
+                    },
+                  },
+                }}
               />
             ) : (
               <div className="absolute left-[50%] flex h-full w-screen -translate-x-[50%] flex-col items-center justify-center">
-                <div className="flex w-full flex-col items-center gap-5">
+                <motion.div
+                  layout
+                  className="flex w-full flex-col items-center gap-5"
+                >
                   <motion.div
                     layout="position"
                     className="rounded bg-white p-1"
@@ -67,7 +79,7 @@ export default function Host() {
                       ))}
                     </AnimatePresence>
                   </motion.div>
-                </div>
+                </motion.div>
               </div>
             )}
             {currentSong && <QueueCard queueData={currentSong} />}
