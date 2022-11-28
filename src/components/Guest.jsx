@@ -37,7 +37,11 @@ export default function Guest() {
     };
     setLoading(true);
     axios.request(options).then((res) => {
-      setResults(res.data.contents);
+      setResults(
+        res.data.contents.filter(
+          (item) => item.video?.author?.canonicalBaseUrl !== "/@singkingkaraoke"
+        )
+      );
       setLoading(false);
     });
   };
