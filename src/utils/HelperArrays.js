@@ -19,66 +19,39 @@ const Icons = [
   "https://dazedimg-dazedgroup.netdna-ssl.com/900/azure/dazed-prod/1280/3/1283985.jpg",
   "https://64.media.tumblr.com/67a9ebb5f8a3697b3b04c9ec7f9fca85/tumblr_inline_p7gkcqmIPf1robswo_500.png",
 ];
-const Balls = [
-  {
-    size: 600,
-    color: "#8a49de",
-    opacity: 0.3,
-    bottom: 50,
-    right: 10,
-    x: [0, 35, 0, -175],
-    y: [0, -15, 0, 200],
-    duration: 15,
-  },
-  {
-    size: 450,
-    color: "#d966d7",
-    opacity: 0.2,
-    top: 0,
-    left: 0,
-    x: [0, 75, 0],
-    y: [0, -50, 0],
-    duration: 17,
-  },
-  {
-    size: 300,
-    color: "#e88141",
-    opacity: 0.1,
-    top: 250,
-    left: 350,
-    x: [0, 115, 0, 75, 0],
-    y: [0, 25, 0, -35, 15],
-    duration: 19,
-  },
-  {
-    size: 650,
-    color: "#f2b827",
-    opacity: 0.2,
-    top: 0,
-    right: 450,
-    x: [0, -25, 0, 75],
-    y: [0, -50, 0, 100],
-    duration: 21,
-  },
-  {
-    size: 500,
-    color: "#1b3e82",
-    opacity: 0.7,
-    bottom: 0,
-    left: 300,
-    x: [0, -95, 0, 185],
-    y: [0, 50, 0, 275],
-    duration: 23,
-  },
-  {
-    size: 500,
-    color: "#f542b0",
-    opacity: 0.2,
-    top: 0,
-    right: 650,
-    x: [0, 350, 0, 95],
-    y: [0, 98, 0, -275],
-    duration: 25,
-  },
-];
+
+const generateBall = () => {
+  const ball = {
+    size: Math.floor(Math.random() * 350),
+    color: `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(
+      Math.random() * 255
+    )}, ${Math.floor(Math.random() * 255)})`,
+    opacity: Math.random() * 0.4,
+    bottom: Math.floor(Math.random() * 1000),
+    left: Math.floor(Math.random() * 1000),
+    top: Math.floor(Math.random() * 1000),
+    right: Math.floor(Math.random() * 1000),
+    x: [
+      Math.floor(Math.random() * (100 - -100 + 1) + -100),
+      Math.floor(Math.random() * (300 - -300 + 1) + -300),
+      Math.floor(Math.random() * (500 - -500 + 1) + -500),
+      Math.floor(Math.random() * (700 - -700 + 1) + -700),
+    ],
+    y: [
+      Math.floor(Math.random() * 100),
+      Math.floor(Math.random() * -200),
+      Math.floor(Math.random() * 300),
+      Math.floor(Math.random() * -400),
+    ],
+    duration: Math.floor(Math.random() * (15 - 10 + 1) + 10),
+  };
+  return ball;
+};
+
+const Balls = [];
+
+for (let i = 0; i < 50; i++) {
+  Balls.push(generateBall());
+}
+
 export { Icons, Balls };

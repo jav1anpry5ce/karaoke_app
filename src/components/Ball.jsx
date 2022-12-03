@@ -14,6 +14,7 @@ export default function Ball({
   y,
   duration,
 }) {
+  const ease = ["anticipate", "backInOut"];
   return (
     <motion.div
       animate={{
@@ -24,6 +25,7 @@ export default function Ball({
           delay: delay,
           repeat: Infinity,
           repeatType: "reverse",
+          ease: ease[Math.floor(Math.random() * ease.length)],
         },
       }}
       style={{
