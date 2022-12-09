@@ -43,7 +43,7 @@ const generateBall = () => {
       Math.floor(Math.random() * 300),
       Math.floor(Math.random() * -400),
     ],
-    duration: Math.floor(Math.random() * (15 - 10 + 1) + 10),
+    duration: Math.floor(Math.random() * (30 - 20 + 1) + 20),
   };
   return ball;
 };
