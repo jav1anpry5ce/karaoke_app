@@ -5,7 +5,7 @@ import { Icons } from "../utils/HelperArrays";
 import { useNavigate } from "react-router-dom";
 
 const Context = createContext();
-const socket = io("https://backend.javaughnpryce.live:5000");
+const socket = io("http://192.168.1.234:5005");
 
 const Provider = ({ children }) => {
   const [queue, setQueue] = useState([]);
@@ -107,6 +107,11 @@ const Provider = ({ children }) => {
     }
   };
 
+  const skipSong = () => {
+    startCountdown();
+    // updateCurrentSong();
+  };
+
   // Socket events
   useEffect(() => {
     socket.on("disconnect", () => {
@@ -185,6 +190,7 @@ const Provider = ({ children }) => {
     closeOpenConnections,
     countdown,
     startCountdown,
+    skipSong,
   };
   return <Context.Provider value={value}>{children}</Context.Provider>;
 };

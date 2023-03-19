@@ -10,7 +10,7 @@ export default function SongCountdown() {
         date={Date.now() + 10000}
         renderer={(props) => {
           return (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 text-[550px] text-white">
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 text-[550px] text-white backdrop-blur">
               {props.seconds}
             </div>
           );

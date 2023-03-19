@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import { Home, Room, Join } from "./pages";
 import { ToastContainer } from "react-toastify";
 import { Provider } from "./context/AppContext";
@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <ToastContainer
         position="top-left"
         autoClose={5000}
@@ -27,7 +27,7 @@ function App() {
           <Route path="*" element={<div>Not Found</div>} />
         </Routes>
       </Provider>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

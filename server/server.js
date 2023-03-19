@@ -1,14 +1,16 @@
-const { createServer } = require("https");
+const { createServer } = require("http");
 const { Server } = require("socket.io");
 const { instrument } = require("@socket.io/admin-ui");
 require("dotenv").config();
-const fs = require("fs");
-const path = require("path");
+// const fs = require("fs");
+// const path = require("path");
 
-const server = createServer({
-  key: fs.readFileSync(path.join(process.env.SERVER_KEY)),
-  cert: fs.readFileSync(path.join(process.env.SERVER_CERT)),
-});
+// const server = createServer({
+//   key: fs.readFileSync(path.join(process.env.SERVER_KEY)),
+//   cert: fs.readFileSync(path.join(process.env.SERVER_CERT)),
+// });
+
+const server = createServer();
 
 const io = new Server(server, {
   cors: {

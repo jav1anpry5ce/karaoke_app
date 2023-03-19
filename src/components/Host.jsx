@@ -21,12 +21,9 @@ export default function Host() {
     onPlaybackError,
     users,
     closeRoom,
+    skipSong,
   } = useContext(Context);
-  const [url] = useState(
-    process.env.NODE_ENV === "development"
-      ? `http://10.0.0.233:3000/join?room=${params.id}`
-      : `${process.env.REACT_APP_PRODUCTION_URL}join?room=${params.id}`
-  );
+  const [url] = useState(`http://192.168.1.234/#/join?room=${params.id}`);
 
   useEffect(() => {
     return () => closeRoom();
@@ -83,6 +80,14 @@ export default function Host() {
               </div>
             )}
             {currentSong && <QueueCard queueData={currentSong} />}
+            {currentSong && (
+              <button
+                onClick={skipSong}
+                className="w-fit rounded bg-red-500 p-4 font-bold text-white shadow shadow-red-500/80 hover:bg-red-500/80"
+              >
+                Skip Current Song
+              </button>
+            )}
           </div>
           <div className="flex w-[25%] flex-col gap-2 overflow-hidden pb-2 scrollbar-hide">
             {!currentSong && (
