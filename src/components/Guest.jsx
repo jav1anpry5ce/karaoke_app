@@ -53,7 +53,12 @@ export default function Guest() {
   };
 
   return (
-    <main className="h-screen overflow-hidden bg-gradient-to-bl from-[#1d2639] to-[#110921]">
+    <main
+      className="h-screen overflow-hidden bg-gradient-to-bl from-[#1d2639] to-[#110921]"
+      style={{
+        height: "-webkit-fill-available",
+      }}
+    >
       <div className="h-full">
         <form
           className="mx-auto flex items-center justify-center gap-2 p-2"
@@ -89,9 +94,19 @@ export default function Guest() {
             <BiExit className="m-0 p-0" fontSize={32} color="#fff" />
           </button>
         </form>
-        <div className="h-full overflow-auto pb-14 scrollbar-hide">
+        <div
+          className="h-full overflow-auto pb-14 scrollbar-hide"
+          style={{
+            height: "-webkit-fill-available",
+          }}
+        >
           {loading && (
-            <div className="flex h-full items-center justify-center">
+            <div
+              className="flex h-full items-center justify-center"
+              style={{
+                height: "-webkit-fill-available",
+              }}
+            >
               <BounceLoader color="#fff" />
             </div>
           )}

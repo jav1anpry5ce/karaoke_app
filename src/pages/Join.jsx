@@ -31,7 +31,12 @@ export default function Join() {
   }, [searchParams]);
 
   return (
-    <main className="h-screen overflow-hidden bg-gradient-to-tl from-[#1d2639] to-[#110921]">
+    <main
+      className="h-screen overflow-hidden bg-gradient-to-tl from-[#1d2639] to-[#110921]"
+      style={{
+        height: "-webkit-fill-available",
+      }}
+    >
       <JoinHeader />
       <div className="flex h-[calc(100vh-68px)] items-center justify-center px-4">
         <form
