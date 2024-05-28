@@ -5,7 +5,9 @@ import { Icons } from "../utils/HelperArrays";
 import { useNavigate } from "react-router-dom";
 
 const Context = createContext();
-const socket = io("http://192.168.1.234:5005");
+const socket = io(`${process.env.REACT_APP_URL}`, {
+  transports: ["websocket"],
+});
 
 const Provider = ({ children }) => {
   const [queue, setQueue] = useState([]);

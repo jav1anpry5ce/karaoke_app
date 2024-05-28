@@ -14,7 +14,7 @@ export default function Header() {
         <div className="z-10 space-x-4">
           {!mobile && (
             <Link
-              className="rounded bg-transparent bg-sky-500 px-3 py-2 font-semibold text-white transition duration-300 ease-in-out hover:shadow-lg hover:shadow-sky-500/40"
+              className="rounded bg-sky-500 px-3 py-2 font-semibold text-white transition duration-300 ease-in-out hover:shadow-lg hover:shadow-sky-500/40"
               to={`/room/${Math.floor(100000 + Math.random() * 900000)}`}
               state={{ host: true }}
             >

@@ -23,7 +23,7 @@ export default function Host() {
     closeRoom,
     skipSong,
   } = useContext(Context);
-  const [url] = useState(`http://192.168.1.234/#/join?room=${params.id}`);
+  const [url] = useState(`http://smashkaraoke.home/#/join?room=${params.id}`);
 
   useEffect(() => {
     return () => closeRoom();
@@ -64,7 +64,7 @@ export default function Host() {
                     layout="position"
                     className="rounded bg-white p-1"
                   >
-                    <QRCode value={url} size={320} level="H" />
+                    <QRCode value={url} size={320} level="L" />
                   </motion.div>
                   <motion.div
                     layout="position"
@@ -93,7 +93,7 @@ export default function Host() {
             {!currentSong && (
               <Link
                 to="/"
-                className="absolute top-7 left-5 inline-flex items-center gap-2 rounded bg-pink-500 p-2.5 font-semibold text-white hover:shadow-lg hover:shadow-pink-500/40 lg:p-2"
+                className="absolute left-5 top-7 inline-flex items-center gap-2 rounded bg-pink-500 p-2.5 font-semibold text-white hover:shadow-lg hover:shadow-pink-500/40 lg:p-2"
               >
                 <AiFillHome fontSize={24} />
                 <span className="hidden lg:block">Close Room</span>
