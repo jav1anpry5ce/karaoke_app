@@ -1,0 +1,20 @@
+services:
+  server:
+    build: 
+      context: ./server
+    ports:
+      - "5005:3000"
+    env_file:
+      - .env
+    restart: unless-stopped
+  web:
+    build: 
+      context: .
+      args:
+        REACT_APP_URL: "https://api-karaoke.javaughnpryce.site"
+        REACT_APP_FRONTEND_URL: "https://karaoke.javaughnpryce.site"
+    ports:
+      - "80:80"
+    env_file:
+      - .env
+    restart: unless-stopped

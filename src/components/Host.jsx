@@ -23,7 +23,9 @@ export default function Host() {
     closeRoom,
     skipSong,
   } = useContext(Context);
-  const [url] = useState(`http://smashkaraoke.home/#/join?room=${params.id}`);
+  const [url] = useState(
+    `${process.env.REACT_APP_FRONTEND_URL}/#/join?room=${params.id}`
+  );
 
   useEffect(() => {
     return () => closeRoom();
