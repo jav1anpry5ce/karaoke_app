@@ -13,7 +13,7 @@ services:
       args:
         REACT_APP_URL: "https://api-karaoke.javaughnpryce.site"
         REACT_APP_FRONTEND_URL: "https://karaoke.javaughnpryce.site"
-        REACT_APP_RAPID_API_KEY: 3551a99878msh4a71547f36ae5d2p1ce7e9jsnde95b48df664
+        REACT_APP_RAPID_API_KEY: ${REACT_APP_RAPID_API_KEY}
     ports:
       - "8081:80"
     env_file:
